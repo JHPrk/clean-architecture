@@ -37,9 +37,12 @@ public class OrderDataMapper {
         .items(orderItemsToOrderItemEntity(createOrderCommand.getItems())).build();
   }
 
-  public CreateOrderResponse orderToCreateOrderResponse(Order order) {
-    return CreateOrderResponse.builder().orderTrackingId(order.getTrackingId().getValue())
-        .orderStatus(order.getOrderStatus()).build();
+  public CreateOrderResponse orderToCreateOrderResponse(Order order, String message) {
+    return CreateOrderResponse.builder()
+        .orderTrackingId(order.getTrackingId().getValue())
+        .orderStatus(order.getOrderStatus())
+        .message(message)
+        .build();
   }
 
   public TrackOrderResponse orderToTrackOrderResponse(Order order) {
