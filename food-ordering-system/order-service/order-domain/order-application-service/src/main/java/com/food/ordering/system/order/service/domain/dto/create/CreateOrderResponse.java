@@ -6,11 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public record CreateOrderResponse(@NotNull UUID orderTrackingId, @NotNull OrderStatus orderStatus,
-                                  @NotNull String message) {
+public final class CreateOrderResponse {
+    @NotNull
+    private final UUID orderTrackingId;
+    @NotNull
+    private final OrderStatus orderStatus;
+    @NotNull
+    private final String message;
+
 }
