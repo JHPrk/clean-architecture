@@ -58,7 +58,8 @@ public class OrderDataMapper {
     return orderItems.stream()
         .map(orderItem -> OrderItem.builder()
             .product(new Product(new ProductId(orderItem.getProductId())))
-            .price(new Money(orderItem.getPrice())).quantity(orderItem.getQuantity())
+            .price(new Money(orderItem.getPrice()))
+            .quantity(orderItem.getQuantity())
             .subTotal(new Money(orderItem.getSubTotal())).build()).toList();
   }
 
