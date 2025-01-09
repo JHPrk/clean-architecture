@@ -24,6 +24,7 @@
     <module>infrastructure/kafka/kafka-consumer</module>
     <module>infrastructure/kafka/kafka-model</module>
     <module>infrastructure/kafka/kafka-config-data</module>
+    <module>common/common-application</module>
   </modules>
 
   <properties>
@@ -64,6 +65,11 @@
       <dependency>
         <groupId>com.food.ordering.system</groupId>
         <artifactId>common-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.food.ordering.system</groupId>
+        <artifactId>common-application</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
