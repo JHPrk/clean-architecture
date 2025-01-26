@@ -27,11 +27,11 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-1:9092,LISTENER_LOCAL://localhost:19092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
-      KAFKA_LISTENER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSET_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_COMPRESSION_TYPE: producer
     volumes:
-      - "./volumes/kafka/broker-1:/var/lib/kafka/data "
+      - "./volumes/kafka/broker-1:/var/lib/kafka/data"
     networks:
       - ${GLOBAL_NETWORK:-kafka}
   kafka-broker-2:
@@ -44,11 +44,11 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-2:9092,LISTENER_LOCAL://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
-      KAFKA_LISTENER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSET_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_COMPRESSION_TYPE: producer
     volumes:
-      - "./volumes/kafka/broker-2:/var/lib/kafka/data "
+      - "./volumes/kafka/broker-2:/var/lib/kafka/data"
     networks:
       - ${GLOBAL_NETWORK:-kafka}
   kafka-broker-3:
@@ -61,11 +61,11 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-3:9092,LISTENER_LOCAL://localhost:39092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
-      KAFKA_LISTENER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSET_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_COMPRESSION_TYPE: producer
     volumes:
-      - "./volumes/kafka/broker-3:/var/lib/kafka/data "
+      - "./volumes/kafka/broker-3:/var/lib/kafka/data"
     networks:
       - ${GLOBAL_NETWORK:-kafka}
   kafka-manager:

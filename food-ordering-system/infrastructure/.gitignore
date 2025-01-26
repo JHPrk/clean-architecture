@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/docker-compose/volumes/kafka/broker-2/
+/docker-compose/volumes/kafka/broker-3/
+/docker-compose/volumes/zookeeper/data/
+/docker-compose/volumes/zookeeper/transactions/
