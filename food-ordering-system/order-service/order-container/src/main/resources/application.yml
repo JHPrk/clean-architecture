@@ -15,14 +15,14 @@ spring:
   jpa:
     open-in-view: false # 데이터 베이스 연결이 오랫동알 열린채로 유지되는 side effect 방지
     show-sql: true # debug시 실행되는 sql 보여줌
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres # need to be stored in different location, but it's okay for localhost
-    password: admin
+    password: 240101
     driver-class-name: org.postgresql.Driver
   sql:
     init:
@@ -53,7 +53,6 @@ kafka-consumer-config:
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   payment-consumer-group-id: payment-topic-consumer
   restaurant-approval-consumer-group-id: restaurant-approval-topic-consumer
-  customer-group-id: customer-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
@@ -63,6 +62,7 @@ kafka-consumer-config:
   session-timeout-ms: 10000
   heartbeat-interval-ms: 3000
   max-poll-interval-ms: 300000
+  max-poll-records: 500
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150

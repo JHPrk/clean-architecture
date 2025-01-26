@@ -51,7 +51,7 @@
           </exclusion>
           <exclusion>
             <groupId>io.swagger</groupId>
-            <artifactId>swagger-cord</artifactId>
+            <artifactId>swagger-core</artifactId>
           </exclusion>
         </exclusions>
       </dependency>

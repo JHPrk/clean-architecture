@@ -1,0 +1,22 @@
+server:
+  port: 8184
+
+spring:
+  jpa:
+    open-in-view: false # 데이터 베이스 연결이 오랫동알 열린채로 유지되는 side effect 방지
+    show-sql: true # debug시 실행되는 sql 보여줌
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=customer&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    username: postgres # need to be stored in different location, but it's okay for localhost
+    password: 240101
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+      schema-locations: classpath:init-schema.sql
+      mode: always
+      data-locations: classpath:init-data.sql

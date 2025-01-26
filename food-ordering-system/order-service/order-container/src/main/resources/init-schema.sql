@@ -17,20 +17,20 @@ CREATE TABLE "order".orders
     tracking_id uuid NOT NULL,
     price numeric(10,2) NOT NULL,
     order_status order_status NOT NULL,
-    failure_messages character varing COLLATE pg_catalog."default",
+    failure_messages character varying COLLATE pg_catalog."default",
     CONSTRAINT orders_pkey PRIMARY KEY (id)
 );
 
 DROP TABLE IF EXISTS "order".order_items CASCADE;
 
-CREATE TABLE "orders".order_items
+CREATE TABLE "order".order_items
 (
     id bigint NOT NULL,
     order_id uuid NOT NULL,
     product_id uuid NOT NULL,
     price numeric(10,2) NOT NULL,
     quantity integer NOT NULL,
-    sub_total numberic(10,2) NOT NULL,
+    sub_total numeric(10,2) NOT NULL,
     CONSTRAINT order_items_pkey PRIMARY KEY (id, order_id)
 );
 
