@@ -9,5 +9,5 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>restaurant-data-access</artifactId>
+  <artifactId>restaurant-dataaccess</artifactId>
 </project>
