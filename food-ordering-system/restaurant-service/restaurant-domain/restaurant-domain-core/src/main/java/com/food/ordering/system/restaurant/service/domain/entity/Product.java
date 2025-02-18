@@ -57,7 +57,7 @@ public class Product extends BaseEntity<ProductId> {
     private Builder() {
     }
 
-    public Builder id(ProductId val) {
+    public Builder productId(ProductId val) {
       productId = val;
       return this;
     }
