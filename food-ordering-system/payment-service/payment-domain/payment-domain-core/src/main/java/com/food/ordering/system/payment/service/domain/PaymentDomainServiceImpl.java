@@ -14,6 +14,7 @@ import com.food.ordering.system.payment.service.domain.event.PaymentEvent;
 import com.food.ordering.system.payment.service.domain.event.PaymentFailedEvent;
 import com.food.ordering.system.payment.service.domain.valueobject.CreditHistoryId;
 import com.food.ordering.system.payment.service.domain.valueobject.TransactionType;
+import java.text.MessageFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -106,7 +107,7 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
     if (totalDebitHistory.isGreaterThan(totalCreditHistory)) {
       log.error("Customer with id : {} doesn't have enough credit according to credit history!",
           creditEntry.getCustomerId().getValue());
-      failureMessages.add(String.format(
+      failureMessages.add(MessageFormat.format(
           "Customer with id : {0} doesn't have enough credit according to credit history!",
           creditEntry.getCustomerId().getValue()));
     }
@@ -116,7 +117,8 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
       log.error("Credit history total is not equal to current credit for customer id : {}!",
           creditEntry.getCustomerId().getValue());
       failureMessages.add(
-          String.format("Credit history total is not equal to current credit for customer id : {}!",
+          MessageFormat.format(
+              "Credit history total is not equal to current credit for customer id : {}!",
               creditEntry.getCustomerId().getValue()));
     }
   }

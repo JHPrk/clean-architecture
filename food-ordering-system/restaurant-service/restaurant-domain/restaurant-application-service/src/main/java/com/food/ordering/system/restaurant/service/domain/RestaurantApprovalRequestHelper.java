@@ -10,6 +10,7 @@ import com.food.ordering.system.restaurant.service.domain.ports.output.message.p
 import com.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.OrderRejectedMessagePublisher;
 import com.food.ordering.system.restaurant.service.domain.ports.output.repository.OrderApprovalRepository;
 import com.food.ordering.system.restaurant.service.domain.ports.output.repository.RestaurantRepository;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +67,8 @@ public class RestaurantApprovalRequestHelper {
     if (restaurantResult.isEmpty()) {
       log.error("Restaurant with id: {} not found!", restaurant.getId().getValue());
       throw new RestaurantDomainException(
-          String.format("Restaurant with id: {0} not found!", restaurant.getId().getValue()));
+          MessageFormat.format("Restaurant with id: {0} not found!",
+              restaurant.getId().getValue()));
     }
 
     Restaurant restaurantEntity = restaurantResult.get();

@@ -4,6 +4,7 @@ import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.exception.OrderNotFoundException;
 import com.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
+import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ public class OrderSagaHelper {
     if (orderResponse.isEmpty()) {
       log.error("Order with id: {} could not be found!", orderId);
       throw new OrderNotFoundException(
-          String.format("Order with id: {0} could not be found!", orderId));
+          MessageFormat.format("Order with id: {0} could not be found!", orderId));
     }
     return orderResponse.get();
   }

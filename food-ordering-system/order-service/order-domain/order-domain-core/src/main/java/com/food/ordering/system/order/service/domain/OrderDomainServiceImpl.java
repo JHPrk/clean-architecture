@@ -34,7 +34,7 @@ public class OrderDomainServiceImpl implements OrderDomainService {
   public OrderPaidEvent payOrder(Order order,
       DomainEventPublisher<OrderPaidEvent> orderPaidEventDomainEventPublisher) {
     order.pay();
-    log.info("Order with id : {} is paied", order.getId().getValue());
+    log.info("Order with id : {} is paid", order.getId().getValue());
     return new OrderPaidEvent(order, ZonedDateTime.now(ZoneId.of(UTC)),
         orderPaidEventDomainEventPublisher);
   }

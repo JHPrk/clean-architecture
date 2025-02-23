@@ -15,6 +15,7 @@ import com.food.ordering.system.payment.service.domain.ports.output.message.publ
 import com.food.ordering.system.payment.service.domain.ports.output.repository.CreditEntryRepository;
 import com.food.ordering.system.payment.service.domain.ports.output.repository.CreditHistoryRepository;
 import com.food.ordering.system.payment.service.domain.ports.output.repository.PaymentRepository;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class PaymentRequestHelper {
     if (paymentResponse.isEmpty()) {
       log.error("Payment with order id: {} could not be found!", paymentRequest.getOrderId());
       throw new PaymentApplicationServiceException(
-          String.format("Payment with order id: {0} could not be found!",
+          MessageFormat.format("Payment with order id: {0} could not be found!",
               paymentRequest.getOrderId()));
     }
     Payment payment = paymentResponse.get();
@@ -98,7 +99,8 @@ public class PaymentRequestHelper {
     if (creditEntry.isEmpty()) {
       log.error("Could not find credit entry for customer: {}", customerId.getValue());
       throw new PaymentApplicationServiceException(
-          String.format("Could not find credit entry for customer: {0}", customerId.getValue()));
+          MessageFormat.format("Could not find credit entry for customer: {0}",
+              customerId.getValue()));
     }
     return creditEntry.get();
   }
@@ -109,7 +111,8 @@ public class PaymentRequestHelper {
     if (creditHistories.isEmpty()) {
       log.error("Could not find credit history for customer: {}", customerId.getValue());
       throw new PaymentApplicationServiceException(
-          String.format("Could not find credit history for customer: {0}", customerId.getValue()));
+          MessageFormat.format("Could not find credit history for customer: {0}",
+              customerId.getValue()));
     }
     return creditHistories.get();
   }
