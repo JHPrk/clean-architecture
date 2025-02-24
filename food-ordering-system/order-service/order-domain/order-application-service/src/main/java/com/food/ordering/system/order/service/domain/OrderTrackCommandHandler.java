@@ -7,6 +7,7 @@ import com.food.ordering.system.order.service.domain.exception.OrderNotFoundExce
 import com.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
 import com.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.food.ordering.system.order.service.domain.valueobject.TrackingId;
+import java.text.MessageFormat;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,8 @@ public class OrderTrackCommandHandler {
     if (orderResult.isEmpty()) {
       log.warn("Could not find order with tracking id : {}", trackOrderQuery.getOrderTrackingId());
       throw new OrderNotFoundException(
-          "Could not find order with tracking id : " + trackOrderQuery.getOrderTrackingId());
+          MessageFormat.format("Could not find order with tracking id : {0}",
+              trackOrderQuery.getOrderTrackingId()));
     }
     return orderDataMapper.orderToTrackOrderResponse(orderResult.get());
   }

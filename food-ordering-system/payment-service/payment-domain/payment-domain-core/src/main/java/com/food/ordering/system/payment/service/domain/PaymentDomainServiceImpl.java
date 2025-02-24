@@ -80,8 +80,9 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
     if (payment.getPrice().isGreaterThan(creditEntry.getTotalCreditAmount())) {
       log.error("Customer with id : {} doesn't have enough credit for payment!",
           creditEntry.getCustomerId().getValue());
-      failureMessages.add("Customer with id = " + payment.getCustomerId().getValue()
-          + "doesn't have enough credit for payment!");
+      failureMessages.add(
+          MessageFormat.format("Customer with id : {0} doesn't have enough credit for payment!",
+              creditEntry.getCustomerId().getValue()));
     }
   }
 

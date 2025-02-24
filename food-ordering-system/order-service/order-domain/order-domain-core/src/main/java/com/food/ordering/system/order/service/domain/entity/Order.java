@@ -10,6 +10,7 @@ import com.food.ordering.system.order.service.domain.exception.OrderDomainExcept
 import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
 import com.food.ordering.system.order.service.domain.valueobject.StreetAddress;
 import com.food.ordering.system.order.service.domain.valueobject.TrackingId;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -100,15 +101,17 @@ public class Order extends AggregateRoot<OrderId> {
 
     if (!price.equals(orderItemsTotal)) {
       throw new OrderDomainException(
-          "Total Price : " + price.getAmount() + " is not euqal to Order items total: "
-              + orderItemsTotal.getAmount() + "!");
+          MessageFormat.format("Total Price : {0} is not equal to Order items total: {1}!",
+              price.getAmount(), orderItemsTotal.getAmount())
+      );
     }
   }
 
   private void validateItemPrice(OrderItem orderItem) {
     if (!orderItem.isPriceValid()) {
-      throw new OrderDomainException("Order item price : " + orderItem.getPrice().getAmount()
-          + " is not valid for product " + orderItem.getProduct().getId().getValue());
+      throw new OrderDomainException(
+          MessageFormat.format("Order item price : {0} is not valid for product {1}",
+              orderItem.getPrice().getAmount(), orderItem.getProduct().getId().getValue()));
     }
 
   }

@@ -12,6 +12,7 @@ import com.food.ordering.system.order.service.domain.ports.output.message.publis
 import com.food.ordering.system.order.service.domain.ports.output.repository.CustomerRepository;
 import com.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.food.ordering.system.order.service.domain.ports.output.repository.RestaurantRepository;
+import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,8 @@ public class OrderCreateHelper {
       log.warn("Could not find restaurant with restaurant id : {}",
           createOrderCommand.getRestaurantId());
       throw new DomainException(
-          "Could not find restaurant with restaurant id " + createOrderCommand.getRestaurantId());
+          MessageFormat.format("Could not find restaurant with restaurant id : {0}",
+              createOrderCommand.getRestaurantId()));
     }
     return optionalRestaurant.get();
   }
