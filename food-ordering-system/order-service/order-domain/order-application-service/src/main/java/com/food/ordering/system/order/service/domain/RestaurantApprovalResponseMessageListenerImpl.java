@@ -3,7 +3,6 @@ package com.food.ordering.system.order.service.domain;
 import static com.food.ordering.system.order.service.domain.entity.Order.FAILURE_MESSAGE_DELIMETER;
 
 import com.food.ordering.system.order.service.domain.dto.message.RestaurantApprovalResponse;
-import com.food.ordering.system.order.service.domain.event.OrderCancelledEvent;
 import com.food.ordering.system.order.service.domain.ports.input.message.listener.restaurantapproval.RestaurantApprovalResponseMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,10 +28,10 @@ public class RestaurantApprovalResponseMessageListenerImpl implements
 
   @Override
   public void orderRejected(RestaurantApprovalResponse restaurantApprovalResponse) {
-    OrderCancelledEvent domainEvent = orderApprovalSaga.rollback(restaurantApprovalResponse);
-    log.info("Publishing order cancelled event for order id: {} with failure messages: {}",
+    orderApprovalSaga.rollback(restaurantApprovalResponse);
+    log.info(
+        "Order Approval Saga rollback operation is completed for order id: {} with failure messages: {}",
         restaurantApprovalResponse.getOrderId(),
         String.join(FAILURE_MESSAGE_DELIMETER, restaurantApprovalResponse.getFailureMessages()));
-    domainEvent.fire();
   }
 }
