@@ -14,6 +14,7 @@ import com.food.ordering.system.order.service.domain.ports.output.repository.Res
 import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import org.springframework.util.ObjectUtils;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class OrderCreateHelper {
 
   private final OrderDomainService orderDomainService;
@@ -28,20 +30,6 @@ public class OrderCreateHelper {
   private final CustomerRepository customerRepository;
   private final RestaurantRepository restaurantRepository;
   private final OrderDataMapper orderDataMapper;
-  private final OrderCreatedPaymentRequestMessagePublisher orderCreatedEventDomainEventPublisher;
-
-
-  public OrderCreateHelper(OrderDomainService orderDomainService, OrderRepository orderRepository,
-      CustomerRepository customerRepository, RestaurantRepository restaurantRepository,
-      OrderDataMapper orderDataMapper,
-      OrderCreatedPaymentRequestMessagePublisher orderCreatedEventDomainEventPublisher) {
-    this.orderDomainService = orderDomainService;
-    this.orderRepository = orderRepository;
-    this.customerRepository = customerRepository;
-    this.restaurantRepository = restaurantRepository;
-    this.orderDataMapper = orderDataMapper;
-    this.orderCreatedEventDomainEventPublisher = orderCreatedEventDomainEventPublisher;
-  }
 
   @Transactional
   public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
@@ -49,7 +37,7 @@ public class OrderCreateHelper {
     Restaurant restaurant = checkRestaurant(createOrderCommand);
     Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
     OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order,
-        restaurant, orderCreatedEventDomainEventPublisher);
+        restaurant);
     saveOrder(order);
     log.info("Order is Created with id: {} ", orderCreatedEvent.getOrder().getId().getValue());
     return orderCreatedEvent;
