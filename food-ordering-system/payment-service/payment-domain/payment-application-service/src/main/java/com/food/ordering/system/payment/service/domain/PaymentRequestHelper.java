@@ -34,25 +34,23 @@ public class PaymentRequestHelper {
   private final CreditHistoryRepository creditHistoryRepository;
 
   @Transactional
-  public PaymentEvent persistPayment(PaymentRequest paymentRequest) {
+  public void persistPayment(PaymentRequest paymentRequest) {
     log.info("Received payment complete event for order id: {}", paymentRequest.getOrderId());
     Payment payment = paymentDataMapper.paymentRequestModelToPayment(paymentRequest);
     CreditEntry creditEntry = getCreditEntry(payment.getCustomerId());
     List<CreditHistory> creditHistories = getCreditHistory(payment.getCustomerId());
     List<String> failureMessages = new ArrayList<>();
     PaymentEvent paymentEvent = paymentDomainService.validateAndInitiatePayment(payment,
-        creditEntry, creditHistories, failureMessages, paymentCompletedMessagePublisher,
-        paymentFailedEventDomainEventPublisher);
+        creditEntry, creditHistories, failureMessages);
     paymentRepository.save(payment);
     if (failureMessages.isEmpty()) {
       creditEntryRepository.save(creditEntry);
       creditHistoryRepository.save(creditHistories.get(creditHistories.size() - 1));
     }
-    return paymentEvent;
   }
 
   @Transactional
-  public PaymentEvent persistCancelPayment(PaymentRequest paymentRequest) {
+  public void persistCancelPayment(PaymentRequest paymentRequest) {
     log.info("Received payment cancel event for order id: {}", paymentRequest.getOrderId());
     Optional<Payment> paymentResponse = paymentRepository.findByOrderId(
         UUID.fromString(paymentRequest.getOrderId()));
@@ -67,10 +65,8 @@ public class PaymentRequestHelper {
     List<CreditHistory> creditHistories = getCreditHistory(payment.getCustomerId());
     List<String> failureMessages = new ArrayList<>();
     PaymentEvent paymentEvent = paymentDomainService.validateAndCancelPayment(payment, creditEntry,
-        creditHistories, failureMessages, paymentCancelledEventDomainEventPublisher,
-        paymentFailedEventDomainEventPublisher);
+        creditHistories, failureMessages);
     persistDbObjects(payment, creditEntry, creditHistories, failureMessages);
-    return paymentEvent;
   }
 
   private CreditEntry getCreditEntry(CustomerId customerId) {
