@@ -35,7 +35,7 @@ public class OrderPaymentEventKafkaPublisher implements PaymentRequestMessagePub
         orderPaymentEventPayload.getOrderId(), sagaId);
 
     try {
-      PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderPaymentEventPayloadToPaymentRequestAvroModel(
+      PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderPaymentEventToPaymentRequestAvroModel(
           sagaId, orderPaymentEventPayload);
 
       kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), sagaId,

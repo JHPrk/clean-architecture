@@ -48,7 +48,7 @@ public class OrderMessagingDataMapper {
         .build();
   }
 
-  public PaymentRequestAvroModel orderPaymentEventPayloadToPaymentRequestAvroModel(String sagaId,
+  public PaymentRequestAvroModel orderPaymentEventToPaymentRequestAvroModel(String sagaId,
       OrderPaymentEventPayload orderPaymentEventPayload) {
     return PaymentRequestAvroModel.newBuilder()
         .setId(UUID.randomUUID().toString())
@@ -60,6 +60,7 @@ public class OrderMessagingDataMapper {
         .setPaymentOrderStatus(
             PaymentOrderStatus.valueOf(orderPaymentEventPayload.getPaymentOrderStatus()))
         .build();
+
   }
 
   public RestaurantApprovalRequestAvroModel orderApprovalEventPayloadToRestaurantApprovalRequestAvroModel(

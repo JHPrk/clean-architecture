@@ -45,7 +45,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
         SagaStatus.STARTED
     );
 
-    if (orderPaymentOutboxMessageResponse.isPresent()) {
+    if (orderPaymentOutboxMessageResponse.isEmpty()) {
       log.info("An outbox message with saga id: {} is already processed!",
           paymentResponse.getSagaId());
       return;
@@ -90,7 +90,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
         getCurrentSagaStatus(paymentResponse.getPaymentStatus())
     );
 
-    if (orderPaymentOutboxMessageResponse.isPresent()) {
+    if (orderPaymentOutboxMessageResponse.isEmpty()) {
       log.info("An outbox message with saga id: {} is already roll backed!",
           paymentResponse.getSagaId());
       return;
