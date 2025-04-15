@@ -32,10 +32,11 @@
 
   <properties>
     <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
-    <mokito.version>5.14.2</mokito.version>
-    <spring.kafkaversion>2.8.2</spring.kafkaversion>
-    <kafka-avro-serializer.version>7.0.1</kafka-avro-serializer.version>
     <avro.version>1.11.0</avro.version>
+    <mokito.version>5.14.2</mokito.version>
+    <kafka-avro-serializer.version>7.0.1</kafka-avro-serializer.version>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
   </properties>
 
   <dependencyManagement>
