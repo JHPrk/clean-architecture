@@ -7,7 +7,12 @@ spec:
   containers:
     - name: kafka-client
       image: confluentinc/cp-enterprise-kafka:6.1.0
+      volumeMounts:
+        - name: kafka-image-storage
+          mountPath: /kafka-client-storage
       command:
         - sh
         - -c
         - "exec tail -f /dev/null"
+  volumes:
+    - name: kafka-client-storage
